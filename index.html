@@ -7,11 +7,24 @@
 <body>
 	<form>
 		Titre : <input type="text" name="title">
-		Author : <input type="text" name="author">
+		Auteur : <input type="text" name="author">
 		Pages : <input type="text" name="pages">
-		Read : <input type="text" name="read">
+		Lu : <input type="text" name="read">
 		<button id='send' type="button">Ok</button>
 	</form>
+
+	<table >
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Auteur</th>
+				<th>Pages</th>
+				<th>Lu</th>
+			</tr>
+		</thead>
+		<tbody id="bookShelf"></tbody>
+	</table>
+
 	<script type="text/javascript" src="book.js" ></script>
 </body>
 </html>
