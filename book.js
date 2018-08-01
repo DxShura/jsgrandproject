@@ -2,17 +2,14 @@
 const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
 let library = [];
-let bookIndex = 0;
 
-buttonSend.addEventListener('click', addBookToLibrary)
+buttonSend.addEventListener('click', addBookToLibrary);
 
 function Book(title, author, pages, read){
-	bookIndex += 1;
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
-	this.bookIndex = bookIndex;
 	this.info = function(){
 		return title + ' by ' + author + ', ' + pages + 'pages' + ', ' + read;
 	}
@@ -26,18 +23,27 @@ function addBookToLibrary(){
 	addBook = new Book(title.value, author.value, pages.value, read.value);
 	library.push(addBook);
 	console.log(library);
-	console.log(bookIndex);
-	render(library);
+	render();
 }
 
-function render(books){
+function deleteBook() {
+  library.splice(this.dataset.bookNumber, 1);
+  let deleteRow = document.getElementById(this.dataset.bookNumber);
+  deleteRow.parentNode.removeChild(deleteRow);
+}
+
+function render(){
 	let tableRow = document.createElement('tr');
 	let tableTitle = document.createElement('td');
 	let tableAuthor = document.createElement('td');
 	let tablePages = document.createElement('td');
 	let tableRead = document.createElement('td');
+	let deleteButton = document.createElement('button');
+	deleteButton.textContent = 'Supprimer';
 
-	books.forEach((book, index) => {	
+	library.forEach((book, index) => {
+		tableRow.id = index;
+		deleteButton.className = 'delete_Button';
 		tableTitle.textContent = `${book.title}`;
 		tableAuthor.textContent = `${book.author}`;
 		tablePages.textContent = `${book.pages}`;
@@ -48,6 +54,15 @@ function render(books){
 		tableRow.appendChild(tablePages);
 		tableRow.appendChild(tableRead);
 
-		bookShelf.appendChild(tableRow);	
+		deleteButton.dataset.bookNumber = index;
+		deleteButton.addEventListener("click", deleteBook);
+
+		tableRow.appendChild(deleteButton);
+
+		bookShelf.appendChild(tableRow);
+
 	});
+
 }
+
+
