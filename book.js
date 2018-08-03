@@ -2,6 +2,7 @@
 const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
 let library = [];
+let checkedButton;
 
 buttonSend.addEventListener('click', addBookToLibrary);
 
@@ -20,7 +21,7 @@ function addBookToLibrary(){
 	const author = document.querySelector("input[name='author']");
 	const pages = document.querySelector("input[name='pages']");
 	const read = document.querySelector("input[name='read']");
-	addBook = new Book(title.value, author.value, pages.value, read.value);
+	addBook = new Book(title.value, author.value, pages.value, read.checked);
 	library.push(addBook);
 	console.log(library);
 	render();
@@ -32,12 +33,32 @@ function deleteBook() {
   deleteRow.parentNode.removeChild(deleteRow);
 }
 
+function readBook(e){
+	if(`${e.read}` === 'true') {
+		checkedButton.textContent = 'v';
+	}else{
+		checkedButton.textContent = 'x';
+	}
+}
+
+Book.prototype.switchReadBook = function(){
+		library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
+		let a = document.getElementById(this.dataset.bookNumber);
+		if(library[this.dataset.bookNumber].read){
+			a.childNodes[3].childNodes[0].innerHTML = "v";
+		}else{
+			a.childNodes[3].childNodes[0].innerHTML = "x";
+		}
+
+}
+
 function render(){
 	let tableRow = document.createElement('tr');
 	let tableTitle = document.createElement('td');
 	let tableAuthor = document.createElement('td');
 	let tablePages = document.createElement('td');
 	let tableRead = document.createElement('td');
+	checkedButton = document.createElement('button');
 	let deleteButton = document.createElement('button');
 	deleteButton.textContent = 'Supprimer';
 
@@ -47,12 +68,16 @@ function render(){
 		tableTitle.textContent = `${book.title}`;
 		tableAuthor.textContent = `${book.author}`;
 		tablePages.textContent = `${book.pages}`;
-		tableRead.textContent = `${book.read}`;
+		readBook(book);
 
 		tableRow.appendChild(tableTitle);
 		tableRow.appendChild(tableAuthor);
 		tableRow.appendChild(tablePages);
 		tableRow.appendChild(tableRead);
+		tableRead.appendChild(checkedButton);
+
+		checkedButton.dataset.bookNumber = index;
+		checkedButton.addEventListener("click", book.switchReadBook);
 
 		deleteButton.dataset.bookNumber = index;
 		deleteButton.addEventListener("click", deleteBook);
