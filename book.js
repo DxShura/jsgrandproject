@@ -3,17 +3,43 @@ const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
 let library = [];
 let checkedButton;
+let bookIndex = 0;
 
 buttonSend.addEventListener('click', addBookToLibrary);
 
+document.addEventListener('DOMContentLoaded', function(){
+	restore();
+});
+
+function store(){
+	library.forEach((book, index) => {
+		localStorage.setItem(`${index}-title`, book.title);
+		localStorage.setItem(`${index}-author`, book.author);
+		localStorage.setItem(`${index}-pages`, book.pages);
+		localStorage.setItem(`${index}-read`, book.read);
+	});
+	localStorage.setItem('lastindex', bookIndex);
+}
+
+function restore(){
+	let i = 0;
+	while(localStorage.getItem(`${i}-title`)){
+		const restoredBook = new Book(localStorage.getItem(`${i}-title`),
+                          		  localStorage.getItem(`${i}-author`),
+                          	      localStorage.getItem(`${i}-pages`),
+								  localStorage.getItem(`${i}-read`));
+		library.push(restoredBook);
+		i++;
+		render();
+	}
+	bookIndex = Number(localStorage.getItem('lastindex'));
+	bookIndex--;
+}
 function Book(title, author, pages, read){
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
-	this.info = function(){
-		return title + ' by ' + author + ', ' + pages + 'pages' + ', ' + read;
-	}
 }
 
 function addBookToLibrary(){
@@ -24,13 +50,27 @@ function addBookToLibrary(){
 	addBook = new Book(title.value, author.value, pages.value, read.checked);
 	library.push(addBook);
 	console.log(library);
+	bookIndex++;
 	render();
+	store();
 }
 
 function deleteBook() {
-  library.splice(this.dataset.bookNumber, 1);
-  let deleteRow = document.getElementById(this.dataset.bookNumber);
-  deleteRow.parentNode.removeChild(deleteRow);
+	library.splice(this.dataset.bookNumber, 1);
+	let deleteRow = document.getElementById(this.dataset.bookNumber);
+	deleteRow.parentNode.removeChild(deleteRow);
+	localStorage.removeItem(this.dataset.bookNumber + '-title');
+	localStorage.removeItem(this.dataset.bookNumber + '-author');
+	localStorage.removeItem(this.dataset.bookNumber + '-pages');
+	localStorage.removeItem(this.dataset.bookNumber + '-read');
+	localStorage.removeItem(bookIndex + '-title');
+	localStorage.removeItem(bookIndex + '-author');
+	localStorage.removeItem(bookIndex + '-pages');
+	localStorage.removeItem(bookIndex + '-read');
+	location.reload();
+	console.log(bookIndex);
+	store();
+	console.log(localStorage);
 }
 
 function readBook(e){
@@ -49,7 +89,7 @@ Book.prototype.switchReadBook = function(){
 		}else{
 			a.childNodes[3].childNodes[0].innerHTML = "x";
 		}
-
+		store();
 }
 
 function render(){
@@ -85,7 +125,6 @@ function render(){
 		tableRow.appendChild(deleteButton);
 
 		bookShelf.appendChild(tableRow);
-
 	});
 
 }
