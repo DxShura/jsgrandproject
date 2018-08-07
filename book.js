@@ -27,7 +27,7 @@ function restore(){
 		const restoredBook = new Book(localStorage.getItem(`${i}-title`),
                           		  localStorage.getItem(`${i}-author`),
                           	      localStorage.getItem(`${i}-pages`),
-								  localStorage.getItem(`${i}-read`));
+								  JSON.parse(localStorage.getItem(`${i}-read`)));
 		library.push(restoredBook);
 		i++;
 		render();
@@ -47,12 +47,67 @@ function addBookToLibrary(){
 	const author = document.querySelector("input[name='author']");
 	const pages = document.querySelector("input[name='pages']");
 	const read = document.querySelector("input[name='read']");
-	addBook = new Book(title.value, author.value, pages.value, read.checked);
-	library.push(addBook);
-	console.log(library);
-	bookIndex++;
-	render();
-	store();
+	var testAuhtorName = /^[A-Za-z]+$/;
+	let titleEmpty;
+	let authorEmpty;
+	let pagesEmpty;
+
+	if(title.value.trim().length){
+		titleEmpty = true;
+	}else{
+		titleEmpty = false;
+		// ajouter bordure rouge ici si le champ est vide !!!
+	}
+
+	if(author.value.trim().length){
+		authorEmpty = true;
+	}else{
+		authorEmpty = false;
+	}
+
+	if(pages.value.trim().length){
+		pagesEmpty = true;
+	}else{
+		pagesEmpty = false;
+	}
+
+	/*if(isNaN(pages.value) === false && testAuhtorName.test(author.value) === true && titleEmpty === true && authorEmpty === true && pagesEmpty === true){
+		addBook = new Book(title.value, author.value, pages.value, read.checked);
+		library.push(addBook);
+		console.log(library);
+		bookIndex++;
+		render();
+		store();
+	} else if(isNaN(pages.value) === true) {
+		console.log('pages isNaN');
+	} else if(testAuhtorName.test(author.value) === false){
+		console.log('Author has a number');
+	} else if(titleEmpty === false){
+		console.log('Title is empty');
+	}*/
+
+	if(titleEmpty === true && authorEmpty === true && pagesEmpty === true){
+		if(isNaN(pages.value) === false && testAuhtorName.test(author.value) === true){
+		addBook = new Book(title.value, author.value, pages.value, read.checked);
+		library.push(addBook);
+		console.log(library);
+		bookIndex++;
+		render();
+		store();
+		} else if(isNaN(pages.value) === true) {
+			console.log('pages isNaN');
+		} else if(testAuhtorName.test(author.value) === false){
+			console.log('Author has a number');
+		}
+	} else if(titleEmpty === false){
+		console.log('Title is empty');
+	} else if(authorEmpty === false){
+		console.log('author is empty');
+	} else if(pagesEmpty === false){
+		console.log('pages is empty');
+	}
+
+
 }
 
 function deleteBook() {
