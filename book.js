@@ -3,7 +3,7 @@ const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
 let library = [];
 let checkedButton;
-let bookIndex = 0;
+let bookIndex;
 
 buttonSend.addEventListener('click', addBookToLibrary);
 
@@ -33,7 +33,12 @@ function restore(){
 		render();
 	}
 	bookIndex = Number(localStorage.getItem('lastindex'));
-	bookIndex--;
+	if(bookIndex === 0){
+		bookIndex = -1;
+	}else if(bookIndex === -2){
+		bookIndex = -1;
+	}
+	
 }
 function Book(title, author, pages, read){
 	this.title = title;
@@ -47,7 +52,7 @@ function addBookToLibrary(){
 	const author = document.querySelector("input[name='author']");
 	const pages = document.querySelector("input[name='pages']");
 	const read = document.querySelector("input[name='read']");
-	var testAuhtorName = /^[A-Za-z]+$/;
+	let testAuhtorName = /^[A-Za-z]+$/;
 	let titleEmpty;
 	let authorEmpty;
 	let pagesEmpty;
@@ -85,9 +90,8 @@ function addBookToLibrary(){
 	} else if(titleEmpty === false){
 		console.log('Title is empty');
 	}*/
-
 	if(titleEmpty === true && authorEmpty === true && pagesEmpty === true){
-		if(isNaN(pages.value) === false && testAuhtorName.test(author.value) === true){
+		if(isNaN(pages.value) === false && testAuhtorName.test(author.value.replace(/\s/g, "")) === true){
 		addBook = new Book(title.value, author.value, pages.value, read.checked);
 		library.push(addBook);
 		console.log(library);
@@ -96,7 +100,7 @@ function addBookToLibrary(){
 		store();
 		} else if(isNaN(pages.value) === true) {
 			console.log('pages isNaN');
-		} else if(testAuhtorName.test(author.value) === false){
+		} else if(testAuhtorName.test(author.value.replace(/\s/g, "")) === false){
 			console.log('Author has a number');
 		}
 	} else if(titleEmpty === false){
@@ -122,6 +126,7 @@ function deleteBook() {
 	localStorage.removeItem(bookIndex + '-author');
 	localStorage.removeItem(bookIndex + '-pages');
 	localStorage.removeItem(bookIndex + '-read');
+	bookIndex--;
 	location.reload();
 	console.log(bookIndex);
 	store();
