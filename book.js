@@ -135,9 +135,9 @@ function deleteBook() {
 
 function readBook(e){
 	if(`${e.read}` === 'true') {
-		checkedButton.textContent = 'v';
+		checkedButton.textContent = 'Oui';
 	}else{
-		checkedButton.textContent = 'x';
+		checkedButton.textContent = 'Non';
 	}
 }
 
@@ -145,9 +145,9 @@ Book.prototype.switchReadBook = function(){
 		library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
 		let a = document.getElementById(this.dataset.bookNumber);
 		if(library[this.dataset.bookNumber].read){
-			a.childNodes[3].childNodes[0].innerHTML = "v";
+			a.childNodes[3].childNodes[0].innerText = "Oui";
 		}else{
-			a.childNodes[3].childNodes[0].innerHTML = "x";
+			a.childNodes[3].childNodes[0].innerText = "Non";
 		}
 		store();
 }
@@ -158,9 +158,10 @@ function render(){
 	let tableAuthor = document.createElement('td');
 	let tablePages = document.createElement('td');
 	let tableRead = document.createElement('td');
-	checkedButton = document.createElement('button');
+	checkedButton = document.createElement('p');
+	let tableDelete = document.createElement('td');
 	let deleteButton = document.createElement('button');
-	deleteButton.textContent = 'Supprimer';
+	deleteButton.textContent = 'Del';
 
 	library.forEach((book, index) => {
 		tableRow.id = index;
@@ -175,6 +176,8 @@ function render(){
 		tableRow.appendChild(tablePages);
 		tableRow.appendChild(tableRead);
 		tableRead.appendChild(checkedButton);
+		tableRow.appendChild(tableDelete);
+		tableDelete.appendChild(deleteButton);
 
 		checkedButton.dataset.bookNumber = index;
 		checkedButton.addEventListener("click", book.switchReadBook);
@@ -182,7 +185,7 @@ function render(){
 		deleteButton.dataset.bookNumber = index;
 		deleteButton.addEventListener("click", deleteBook);
 
-		tableRow.appendChild(deleteButton);
+
 
 		bookShelf.appendChild(tableRow);
 	});

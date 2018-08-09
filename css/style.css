@@ -1,10 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+html {
+  font-family: 'Raleway', sans-serif; }
+
+form {
+  display: none; }
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 table {
-  border-collapse: collapse; }
-
-tbody > tr:first-child {
-  border-top: 3px solid black; }
-
-tbody > tr:last-child {
-  border-bottom: 3px solid black; }
+  border-collapse: collapse;
+  width: 50%; }
+  table tr {
+    height: 42px; }
+  table td {
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 0px; }
+  table td:first-child, table td:nth-child(2) {
+    width: 35%; }
+  table td:nth-child(3), table td:nth-child(4), table td:nth-child(5) {
+    width: 10%; }
+  table tbody tr:nth-child(2n+0) {
+    background-color: grey;
+    color: #fff; }
+    table tbody tr:nth-child(2n+0) td:nth-child(4):hover {
+      background-color: #fff;
+      color: #000; }
+  table tbody tr:nth-child(2n+1) td:nth-child(4):hover {
+    background-color: grey;
+    color: #fff; }
+  table tbody tr:first-child {
+    border-top: 1px solid black; }
+  table tbody tr:last-child {
+    border-bottom: 1px solid black; }
+  table p {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 /*# sourceMappingURL=style.css.map */
