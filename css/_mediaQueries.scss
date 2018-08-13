@@ -1,0 +1,86 @@
+@media (max-width: 1024px) {
+	table{
+		width: 80%;
+	}
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (max-width: 576px) {
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	table{
+		tr{
+			height: auto;
+		}
+		thead{
+			tr{
+				position: absolute;
+				top: -9999px;
+				left: -9999px;
+			}
+		}
+		tbody{
+			td:first-child, td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6){
+				width: 64.7%;
+				height: 42px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			tr:nth-child(2n+0){
+				td:nth-child(5):hover{
+					background-color: grey;
+					color: #fff;
+					transition: none;
+				}
+				td:nth-child(5){
+					transition: none;
+				}
+			}
+			tr:nth-child(2n+1){
+				td:nth-child(5):hover{
+					background-color: white;
+					color: #000;
+					transition: none;
+				}
+				td:nth-child(5){
+					transition: none;
+				}
+			}
+			tr:first-child{
+				border-top: none;
+			}
+			tr:last-child{
+				border-bottom: none;
+			}
+			td:last-child{
+				padding-top: 0px;
+			}
+			td{
+				border: none;
+				position: relative;
+				padding-left: 35%;
+			}
+			td:before{
+				position: absolute;
+				left: 6px;
+				white-space: nowrap;
+			}
+			td:nth-of-type(1):before { content: "#"; }
+			td:nth-of-type(2):before { content: "Titre"; }
+			td:nth-of-type(3):before { content: "Auteur"; }
+			td:nth-of-type(4):before { content: "Pages"; }
+			td:nth-of-type(5):before { content: "Lu"; }
+			td:nth-of-type(6):before { content: "Supprimer"; }
+		}
+	}
+}

@@ -145,15 +145,16 @@ Book.prototype.switchReadBook = function(){
 		library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
 		let a = document.getElementById(this.dataset.bookNumber);
 		if(library[this.dataset.bookNumber].read){
-			a.childNodes[3].childNodes[0].innerText = "Oui";
+			a.childNodes[4].childNodes[0].innerText = "Oui";
 		}else{
-			a.childNodes[3].childNodes[0].innerText = "Non";
+			a.childNodes[4].childNodes[0].innerText = "Non";
 		}
 		store();
 }
 
 function render(){
 	let tableRow = document.createElement('tr');
+	let tableIndex = document.createElement('td');
 	let tableTitle = document.createElement('td');
 	let tableAuthor = document.createElement('td');
 	let tablePages = document.createElement('td');
@@ -161,16 +162,17 @@ function render(){
 	checkedButton = document.createElement('p');
 	let tableDelete = document.createElement('td');
 	let deleteButton = document.createElement('button');
-	deleteButton.textContent = 'Del';
 
 	library.forEach((book, index) => {
 		tableRow.id = index;
 		deleteButton.className = 'delete_Button';
+		tableIndex.textContent = index + 1;
 		tableTitle.textContent = `${book.title}`;
 		tableAuthor.textContent = `${book.author}`;
 		tablePages.textContent = `${book.pages}`;
 		readBook(book);
 
+		tableRow.appendChild(tableIndex);
 		tableRow.appendChild(tableTitle);
 		tableRow.appendChild(tableAuthor);
 		tableRow.appendChild(tablePages);
