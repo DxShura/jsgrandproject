@@ -32,14 +32,12 @@
 			td:first-child, td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6){
 				width: 64.7%;
 				height: 42px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+				@include flex-center();
 			}
 			tr:nth-child(2n+0){
 				td:nth-child(5):hover{
-					background-color: grey;
-					color: #fff;
+					background-color: $color-grey;
+					color: $color-white;
 					transition: none;
 				}
 				td:nth-child(5){
@@ -48,8 +46,8 @@
 			}
 			tr:nth-child(2n+1){
 				td:nth-child(5):hover{
-					background-color: white;
-					color: #000;
+					background-color: $color-white;
+					color: $color-black;
 					transition: none;
 				}
 				td:nth-child(5){

@@ -7,13 +7,25 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<form>
-		Titre : <input type="text" name="title">
-		Auteur : <input type="text" name="author">
-		Pages : <input type="text" name="pages">
-		Lu : <input type="checkbox" name="read">
-		<button id='send' type="button">Ok</button>
-	</form>
+
+	<div>
+		<h1>Library</h1>
+		<button id="newBook" type="button">Nouveau livre</button>
+	</div>
+
+	<div id='myForm'>
+		<div>
+			<span class="close">&times;</span>
+			<form>
+				Titre : <input type="text" name="title">
+				Auteur : <input type="text" name="author">
+				Pages : <input type="text" name="pages">
+				Lu : <input type="checkbox" name="read">
+				<button id='send' type="button">Ok</button>
+			</form>
+		</div>
+	</div>
+
 	<div class="wrapper">
 		<table>
 			<thead>

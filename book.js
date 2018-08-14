@@ -1,4 +1,3 @@
-
 const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
 let library = [];
@@ -98,6 +97,7 @@ function addBookToLibrary(){
 		bookIndex++;
 		render();
 		store();
+		myForm.classList.remove('open');
 		} else if(isNaN(pages.value) === true) {
 			console.log('pages isNaN');
 		} else if(testAuhtorName.test(author.value.replace(/\s/g, "")) === false){
@@ -194,4 +194,23 @@ function render(){
 
 }
 
+//form modal
+
+let myForm = document.getElementById('myForm');
+let popForm = document.getElementById('newBook');
+let closeForm = document.getElementsByClassName('close')[0];
+
+popForm.addEventListener("click", function(){
+	myForm.classList.add('open');
+});
+
+closeForm.addEventListener("click", function(){
+	myForm.classList.remove('open');
+});
+
+window.addEventListener("click", function(event){
+	if(event.target == myForm){
+		myForm.classList.remove('open');
+	}
+});
 

@@ -3,9 +3,29 @@ html{
 }
 
 .wrapper{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	@extend %flex-center;
+}
+
+div:first-child{
+	@extend %flex-center;
+	h1{
+		padding-right: 10px;
+	}
+	button{
+		border: none;
+		width: 100px;
+		height: 50px;
+		border-radius: 10%;
+		transition: 0.2s;
+		&:focus{
+			outline: 0;
+		}
+		&:hover{
+			background-color: $color-grey;
+			color: $color-white;
+			transition: 0.2s;
+		}
+	}
 }
 
 table{
@@ -29,14 +49,14 @@ table{
 			width: 10%;
 		}
 		tr:nth-child(2n+0){
-			background-color: grey;
-			color: #fff;
+			background-color: $color-grey;
+			color: $color-white;
 			button{
 				filter: invert(100%);
 			}
 			td:nth-child(5):hover{
-				background-color: #fff;
-				color: #000;
+				background-color: $color-white;
+				color: $color-black;
 				transition: 0.5s;
 			}
 			td:nth-child(5){
@@ -45,8 +65,8 @@ table{
 		}
 		tr:nth-child(2n+1){
 			td:nth-child(5):hover{
-				background-color: grey;
-				color: #fff;
+				background-color: $color-grey;
+				color: $color-white;
 				transition: 0.5s;
 			}
 			td:nth-child(5){
@@ -54,20 +74,15 @@ table{
 			}
 		}
 		tr:first-child{
-			border-top: 1px solid black;
+			border-top: 1px solid $color-black;
 		}
 		tr:last-child{
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid $color-black;
 		}
 	}
 	p{
 		cursor: pointer;
-		-webkit-touch-callout: none;
-	    -webkit-user-select: none;
-	     -khtml-user-select: none;
-	       -moz-user-select: none;
-	        -ms-user-select: none;
-	            user-select: none;
+		@extend %no-selection;
 	    margin-top: 0px;
 	    margin-bottom: 0px;
 	}
