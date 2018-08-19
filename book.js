@@ -1,5 +1,10 @@
 const buttonSend = document.getElementById('send');
 const bookShelf = document.getElementById('bookShelf');
+const title = document.querySelector("input[name='title']");
+const author = document.querySelector("input[name='author']");
+const pages = document.querySelector("input[name='pages']");
+const read = document.querySelector("input[name='read']");
+let paraEmptyInput = document.getElementsByClassName('warningEmptyInput')[0];
 let library = [];
 let checkedButton;
 let bookIndex;
@@ -47,11 +52,6 @@ function Book(title, author, pages, read){
 }
 
 function addBookToLibrary(){
-	const title = document.querySelector("input[name='title']");
-	const author = document.querySelector("input[name='author']");
-	const pages = document.querySelector("input[name='pages']");
-	const read = document.querySelector("input[name='read']");
-	let testAuhtorName = /^[A-Za-z]+$/;
 	let titleEmpty;
 	let authorEmpty;
 	let pagesEmpty;
@@ -60,49 +60,34 @@ function addBookToLibrary(){
 		titleEmpty = true;
 	}else{
 		titleEmpty = false;
-		// ajouter bordure rouge ici si le champ est vide !!!
+		title.classList.add('emptyInput');
+		paraEmptyInput.classList.add('displayVisible');
 	}
 
 	if(author.value.trim().length){
 		authorEmpty = true;
 	}else{
 		authorEmpty = false;
+		author.classList.add('emptyInput');
+		paraEmptyInput.classList.add('displayVisible');
 	}
 
 	if(pages.value.trim().length){
 		pagesEmpty = true;
 	}else{
 		pagesEmpty = false;
+		pages.classList.add('emptyInput');
+		paraEmptyInput.classList.add('displayVisible');
 	}
 
-	/*if(isNaN(pages.value) === false && testAuhtorName.test(author.value) === true && titleEmpty === true && authorEmpty === true && pagesEmpty === true){
-		addBook = new Book(title.value, author.value, pages.value, read.checked);
-		library.push(addBook);
-		console.log(library);
-		bookIndex++;
-		render();
-		store();
-	} else if(isNaN(pages.value) === true) {
-		console.log('pages isNaN');
-	} else if(testAuhtorName.test(author.value) === false){
-		console.log('Author has a number');
-	} else if(titleEmpty === false){
-		console.log('Title is empty');
-	}*/
 	if(titleEmpty === true && authorEmpty === true && pagesEmpty === true){
-		if(isNaN(pages.value) === false && testAuhtorName.test(author.value.replace(/\s/g, "")) === true){
 		addBook = new Book(title.value, author.value, pages.value, read.checked);
 		library.push(addBook);
-		console.log(library);
 		bookIndex++;
 		render();
 		store();
-		myForm.classList.remove('open');
-		} else if(isNaN(pages.value) === true) {
-			console.log('pages isNaN');
-		} else if(testAuhtorName.test(author.value.replace(/\s/g, "")) === false){
-			console.log('Author has a number');
-		}
+		quitForm();
+		emptyInput();
 	} else if(titleEmpty === false){
 		console.log('Title is empty');
 	} else if(authorEmpty === false){
@@ -110,8 +95,6 @@ function addBookToLibrary(){
 	} else if(pagesEmpty === false){
 		console.log('pages is empty');
 	}
-
-
 }
 
 function deleteBook() {
@@ -128,13 +111,11 @@ function deleteBook() {
 	localStorage.removeItem(bookIndex + '-read');
 	bookIndex--;
 	location.reload();
-	console.log(bookIndex);
 	store();
-	console.log(localStorage);
 }
 
-function readBook(e){
-	if(`${e.read}` === 'true') {
+function readBook(focusedBook){
+	if(`${focusedBook.read}` === 'true') {
 		checkedButton.textContent = 'Oui';
 	}else{
 		checkedButton.textContent = 'Non';
@@ -143,11 +124,11 @@ function readBook(e){
 
 Book.prototype.switchReadBook = function(){
 		library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
-		let a = document.getElementById(this.dataset.bookNumber);
+		let bookToSwitchRead = document.getElementById(this.dataset.bookNumber);
 		if(library[this.dataset.bookNumber].read){
-			a.childNodes[4].childNodes[0].innerText = "Oui";
+			bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Oui";
 		}else{
-			a.childNodes[4].childNodes[0].innerText = "Non";
+			bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Non";
 		}
 		store();
 }
@@ -165,7 +146,6 @@ function render(){
 
 	library.forEach((book, index) => {
 		tableRow.id = index;
-		deleteButton.className = 'delete_Button';
 		tableIndex.textContent = index + 1;
 		tableTitle.textContent = `${book.title}`;
 		tableAuthor.textContent = `${book.author}`;
@@ -187,17 +167,15 @@ function render(){
 		deleteButton.dataset.bookNumber = index;
 		deleteButton.addEventListener("click", deleteBook);
 
-
-
 		bookShelf.appendChild(tableRow);
 	});
-
 }
 
-//form modal
+//form
 
 let myForm = document.getElementById('myForm');
 let popForm = document.getElementById('newBook');
+let stopForm = document.getElementById('stop');
 let closeForm = document.getElementsByClassName('close')[0];
 
 popForm.addEventListener("click", function(){
@@ -205,12 +183,57 @@ popForm.addEventListener("click", function(){
 });
 
 closeForm.addEventListener("click", function(){
-	myForm.classList.remove('open');
+	quitForm();
+	emptyInput();
+});
+stopForm.addEventListener("click", function(){
+	quitForm();
+	emptyInput();
 });
 
 window.addEventListener("click", function(event){
 	if(event.target == myForm){
-		myForm.classList.remove('open');
+		quitForm();
+		emptyInput();
 	}
 });
 
+function quitForm(){
+	myForm.classList.remove('open');
+	title.classList.remove('emptyInput');
+	author.classList.remove('emptyInput');
+	pages.classList.remove('emptyInput');
+	paraEmptyInput.classList.remove('displayVisible');
+}
+
+function emptyInput(){
+	title.value="";
+	pages.value="";
+	author.value="";
+	read.checked=false;
+}
+
+author.addEventListener("keyup", function(){
+	let regexLetter = /[^a-zA-Z\s.]*$/;
+	author.value = author.value.replace(regexLetter, "");
+});
+
+pages.addEventListener("keyup", function(){
+	let regexNumber = /[^0-9]/gi;
+	pages.value = pages.value.replace(regexNumber, "");
+});
+
+title.addEventListener("input", function(){
+	title.classList.remove('emptyInput');
+	paraEmptyInput.classList.remove('displayVisible');
+});
+
+author.addEventListener("input", function(){
+	author.classList.remove('emptyInput');
+	paraEmptyInput.classList.remove('displayVisible');
+});
+
+pages.addEventListener("input", function(){
+	pages.classList.remove('emptyInput');
+	paraEmptyInput.classList.remove('displayVisible');
+});

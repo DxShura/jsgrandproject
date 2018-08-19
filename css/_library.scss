@@ -6,25 +6,13 @@ html{
 	@extend %flex-center;
 }
 
-div:first-child{
+#title:first-child{
 	@extend %flex-center;
 	h1{
 		padding-right: 10px;
 	}
 	button{
-		border: none;
-		width: 100px;
-		height: 50px;
-		border-radius: 10%;
-		transition: 0.2s;
-		&:focus{
-			outline: 0;
-		}
-		&:hover{
-			background-color: $color-grey;
-			color: $color-white;
-			transition: 0.2s;
-		}
+		@include button-form();
 	}
 }
 

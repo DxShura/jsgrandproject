@@ -21,3 +21,20 @@ $color-black: #000;
 	align-items: center;
 	justify-content: center;	
 }
+@mixin button-form{
+	border: none;
+	width: 100px;
+	height: 50px;
+	border-radius: 10%;
+	transition: 0.2s;
+	font-size: 13px;
+	font-weight: bold;
+	&:focus{
+		outline: 0;
+	}
+	&:hover{
+		background-color: $color-grey;
+		color: $color-white;
+		transition: 0.2s;
+	}
+}

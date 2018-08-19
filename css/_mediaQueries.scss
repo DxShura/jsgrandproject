@@ -2,17 +2,47 @@
 	table{
 		width: 80%;
 	}
+	
+	div#myForm{
+		div#firstDivForm{
+			width: 80%;
+		}
+		.divButton{
+			width: 49%;
+		}
+	}
 }
 
 @media (max-width: 992px) {
 
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: 768px) {
+	div#myForm{
+		button{
+			margin-top: 10px;
+		}
+		.checkBox{
+			width: 100%;
+		}
+		.divButton{
+			width: 66%;
+		}
+	}
 }
 
 @media (max-width: 576px) {
+	
+
+	div#myForm{
+		input{
+			width: 236px;
+		}
+		.divButton{
+			width: 84%;
+		}
+	}
+
 	table, thead, tbody, th, td, tr {
 		display: block;
 	}

@@ -8,21 +8,42 @@
 </head>
 <body>
 
-	<div>
-		<h1>Library</h1>
+	<div id='title'>
+		<h1>Librairie</h1>
 		<button id="newBook" type="button">Nouveau livre</button>
 	</div>
 
 	<div id='myForm'>
-		<div>
-			<span class="close">&times;</span>
-			<form>
-				Titre : <input type="text" name="title">
-				Auteur : <input type="text" name="author">
-				Pages : <input type="text" name="pages">
-				Lu : <input type="checkbox" name="read">
-				<button id='send' type="button">Ok</button>
+		<div id='firstDivForm'>
+			<ul>
+				<li><h1>Ajouter un livre</h1></li>
+				<li><span class="close">&times;</span></li>
+			</ul>
+
+			<form novalidate>
+				<div class="inputBox">
+					<input type="text" name="title" required="" autocomplete="off" >
+					<label>Titre</label>
+				</div>
+				<div class="inputBox">
+					<input type="text" name="author" required="" autocomplete="off" >
+					<label>Auteur</label>
+				</div>
+				<div class="inputBox">
+					<input type="text" name="pages" required="" autocomplete="off" >
+					<label>Pages</label>
+				</div>
+				<div class="checkBox">
+					<span>Lu :</span>
+					<input type="checkbox" id="checkboxInput" name="read" />
+					<label class="labelChecked" for="checkboxInput"></label>
+				</div>
 			</form>
+			<div class="divButton">
+				<p class="warningEmptyInput">Un/ou plusieurs champs est/sont vide(s).</p>
+				<button id='send' type="button">Ajouter</button>
+				<button id='stop' type="button">Annuler</button>
+			</div>
 		</div>
 	</div>
 
