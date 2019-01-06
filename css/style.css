@@ -322,6 +322,10 @@ table td:last-child {
   padding-top: 4px;
 }
 
+.createBy {
+  text-align: center;
+}
+
 @media (max-width: 1024px) {
   table {
     width: 80%;
