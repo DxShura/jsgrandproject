@@ -2,15 +2,22 @@
 table p {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+}
 
 .wrapper, #title:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center; }
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 
 div#myForm {
   display: none;
@@ -22,266 +29,410 @@ div#myForm {
   height: 100%;
   overflow: auto;
   background-color: black;
-  background-color: rgba(0, 0, 0, 0.4); }
-  div#myForm div#firstDivForm {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%; }
-  div#myForm ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between; }
-  div#myForm button {
-    border: none;
-    width: 100px;
-    height: 50px;
-    border-radius: 10%;
-    transition: 0.2s;
-    font-size: 13px;
-    font-weight: bold;
-    margin-right: 5px; }
-    div#myForm button:focus {
-      outline: 0; }
-    div#myForm button:hover {
-      background-color: grey;
-      color: #fff;
-      transition: 0.2s; }
-  div#myForm form {
-    height: 107px; }
-    div#myForm form span {
-      padding-top: 8px;
-      padding-left: 10px;
-      position: absolute; }
-  div#myForm .inputBox {
-    position: relative;
-    float: left;
-    padding-left: 10px; }
-  div#myForm input {
-    width: 350px;
-    padding: 10px 0;
-    font-size: 16px;
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid grey; }
-  div#myForm input[name='read'] {
-    width: 110px;
-    position: relative;
-    top: 10px; }
-  div#myForm input:focus {
-    outline: none; }
-  div#myForm label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 10px;
-    font-size: 16px;
-    pointer-events: none;
-    transition: 0.5s; }
-  div#myForm input:focus ~ label,
-  div#myForm input:valid ~ label {
-    top: -18px;
-    left: 0;
-    font-size: 12px; }
-  div#myForm .checkBox {
-    position: relative;
-    float: left; }
-    div#myForm .checkBox .labelChecked {
-      cursor: pointer;
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      top: 5px;
-      left: 46px;
-      background: #eee;
-      border: 1px solid #ddd;
-      padding: 0;
-      pointer-events: auto; }
-      div#myForm .checkBox .labelChecked:after {
-        opacity: 0.2;
-        content: '';
-        position: absolute;
-        width: 9px;
-        height: 5px;
-        background: transparent;
-        top: 6px;
-        left: 7px;
-        border: 3px solid #333;
-        border-top: none;
-        border-right: none;
-        transform: rotate(-45deg); }
-      div#myForm .checkBox .labelChecked:hover::after {
-        opacity: 0.5; }
-    div#myForm .checkBox input[type=checkbox]:checked + .labelChecked:after {
-      opacity: 1; }
-  div#myForm .emptyInput {
-    border-bottom: 1px solid red; }
-  div#myForm .warningEmptyInput {
-    color: red;
-    display: none; }
-  div#myForm .displayVisible {
-    display: block; }
-  div#myForm .divButton {
-    width: 40%; }
-  div#myForm .close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold; }
-    div#myForm .close:hover, div#myForm .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer; }
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+div#myForm div#firstDivForm {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+div#myForm ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+div#myForm button {
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 10%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  font-size: 13px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+div#myForm button:focus {
+  outline: 0;
+}
+
+div#myForm button:hover {
+  background-color: grey;
+  color: #fff;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+div#myForm form {
+  height: 107px;
+}
+
+div#myForm form span {
+  padding-top: 8px;
+  padding-left: 10px;
+  position: absolute;
+}
+
+div#myForm .inputBox {
+  position: relative;
+  float: left;
+  padding-left: 10px;
+}
+
+div#myForm input {
+  width: 350px;
+  padding: 10px 0;
+  font-size: 16px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+div#myForm input[name='read'] {
+  width: 110px;
+  position: relative;
+  top: 10px;
+}
+
+div#myForm input:focus {
+  outline: none;
+}
+
+div#myForm label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 10px;
+  font-size: 16px;
+  pointer-events: none;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+div#myForm input:focus ~ label,
+div#myForm input:valid ~ label {
+  top: -18px;
+  left: 0;
+  font-size: 12px;
+}
+
+div#myForm .checkBox {
+  position: relative;
+  float: left;
+}
+
+div#myForm .checkBox .labelChecked {
+  cursor: pointer;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 5px;
+  left: 46px;
+  background: #eee;
+  border: 1px solid #ddd;
+  padding: 0;
+  pointer-events: auto;
+}
+
+div#myForm .checkBox .labelChecked:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 6px;
+  left: 7px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+div#myForm .checkBox .labelChecked:hover::after {
+  opacity: 0.5;
+}
+
+div#myForm .checkBox input[type=checkbox]:checked + .labelChecked:after {
+  opacity: 1;
+}
+
+div#myForm .emptyInput {
+  border-bottom: 1px solid red;
+}
+
+div#myForm .warningEmptyInput {
+  color: red;
+  display: none;
+}
+
+div#myForm .displayVisible {
+  display: block;
+}
+
+div#myForm .divButton {
+  width: 40%;
+}
+
+div#myForm .close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+div#myForm .close:hover, div#myForm .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 .open {
-  display: block !important; }
+  display: block !important;
+}
 
 html {
-  font-family: 'Raleway', sans-serif; }
+  font-family: 'Raleway', sans-serif;
+}
 
 #title:first-child h1 {
-  padding-right: 10px; }
+  padding-right: 10px;
+}
+
 #title:first-child button {
   border: none;
   width: 100px;
   height: 50px;
   border-radius: 10%;
+  -webkit-transition: 0.2s;
   transition: 0.2s;
   font-size: 13px;
-  font-weight: bold; }
-  #title:first-child button:focus {
-    outline: 0; }
-  #title:first-child button:hover {
-    background-color: grey;
-    color: #fff;
-    transition: 0.2s; }
+  font-weight: bold;
+}
+
+#title:first-child button:focus {
+  outline: 0;
+}
+
+#title:first-child button:hover {
+  background-color: grey;
+  color: #fff;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
 
 table {
   border-collapse: collapse;
-  width: 50%; }
-  table tr {
-    height: 42px; }
-  table tbody td {
-    text-align: center;
-    padding-top: 0px;
-    padding-bottom: 0px; }
-  table tbody td:nth-child(2), table tbody td:nth-child(3) {
-    width: 30%; }
-  table tbody td:first-child, table tbody td:nth-child(4), table tbody td:nth-child(5), table tbody td:nth-child(6) {
-    width: 10%; }
-  table tbody tr:nth-child(2n+0) {
-    background-color: grey;
-    color: #fff; }
-    table tbody tr:nth-child(2n+0) button {
-      filter: invert(100%); }
-    table tbody tr:nth-child(2n+0) td:nth-child(5):hover {
-      background-color: #fff;
-      color: #000;
-      transition: 0.5s; }
-    table tbody tr:nth-child(2n+0) td:nth-child(5) {
-      transition: 0.5s; }
-  table tbody tr:nth-child(2n+1) td:nth-child(5):hover {
-    background-color: grey;
-    color: #fff;
-    transition: 0.5s; }
-  table tbody tr:nth-child(2n+1) td:nth-child(5) {
-    transition: 0.5s; }
-  table tbody tr:first-child {
-    border-top: 1px solid #000; }
-  table tbody tr:last-child {
-    border-bottom: 1px solid #000; }
-  table p {
-    cursor: pointer;
-    margin-top: 0px;
-    margin-bottom: 0px; }
-  table button {
-    cursor: pointer;
-    background: url(../img/trashcan.png) no-repeat;
-    padding-top: 10%;
-    background-size: 25px 25px;
-    width: 25px;
-    height: 25px;
-    border: none; }
-    table button:focus {
-      outline: 0; }
-  table td:last-child {
-    padding-top: 4px; }
+  width: 50%;
+}
+
+table tr {
+  height: 42px;
+}
+
+table tbody td {
+  text-align: center;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+table tbody td:nth-child(2), table tbody td:nth-child(3) {
+  width: 30%;
+}
+
+table tbody td:first-child, table tbody td:nth-child(4), table tbody td:nth-child(5), table tbody td:nth-child(6) {
+  width: 10%;
+}
+
+table tbody tr:nth-child(2n+0) {
+  background-color: grey;
+  color: #fff;
+}
+
+table tbody tr:nth-child(2n+0) button {
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+table tbody tr:nth-child(2n+0) td:nth-child(5):hover {
+  background-color: #fff;
+  color: #000;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+table tbody tr:nth-child(2n+0) td:nth-child(5) {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+table tbody tr:nth-child(2n+1) td:nth-child(5):hover {
+  background-color: grey;
+  color: #fff;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+table tbody tr:nth-child(2n+1) td:nth-child(5) {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+table tbody tr:first-child {
+  border-top: 1px solid #000;
+}
+
+table tbody tr:last-child {
+  border-bottom: 1px solid #000;
+}
+
+table p {
+  cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+table button {
+  cursor: pointer;
+  background: url(../img/trashcan.png) no-repeat;
+  padding-top: 10%;
+  background-size: 25px 25px;
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+
+table button:focus {
+  outline: 0;
+}
+
+table td:last-child {
+  padding-top: 4px;
+}
 
 @media (max-width: 1024px) {
   table {
-    width: 80%; }
-
+    width: 80%;
+  }
   div#myForm div#firstDivForm {
-    width: 80%; }
+    width: 80%;
+  }
   div#myForm .divButton {
-    width: 49%; } }
+    width: 49%;
+  }
+}
+
 @media (max-width: 768px) {
   div#myForm button {
-    margin-top: 10px; }
+    margin-top: 10px;
+  }
   div#myForm .checkBox {
-    width: 100%; }
+    width: 100%;
+  }
   div#myForm .divButton {
-    width: 66%; } }
+    width: 66%;
+  }
+}
+
 @media (max-width: 576px) {
   div#myForm input {
-    width: 236px; }
+    width: 236px;
+  }
   div#myForm .divButton {
-    width: 84%; }
-
+    width: 84%;
+  }
   table, thead, tbody, th, td, tr {
-    display: block; }
-
+    display: block;
+  }
   table tr {
-    height: auto; }
+    height: auto;
+  }
   table thead tr {
     position: absolute;
     top: -9999px;
-    left: -9999px; }
+    left: -9999px;
+  }
   table tbody td:first-child, table tbody td:nth-child(2), table tbody td:nth-child(3), table tbody td:nth-child(4), table tbody td:nth-child(5), table tbody td:nth-child(6) {
     width: 64.7%;
     height: 42px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center; }
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
   table tbody tr:nth-child(2n+0) td:nth-child(5):hover {
     background-color: grey;
     color: #fff;
-    transition: none; }
+    -webkit-transition: none;
+    transition: none;
+  }
   table tbody tr:nth-child(2n+0) td:nth-child(5) {
-    transition: none; }
+    -webkit-transition: none;
+    transition: none;
+  }
   table tbody tr:nth-child(2n+1) td:nth-child(5):hover {
     background-color: #fff;
     color: #000;
-    transition: none; }
+    -webkit-transition: none;
+    transition: none;
+  }
   table tbody tr:nth-child(2n+1) td:nth-child(5) {
-    transition: none; }
+    -webkit-transition: none;
+    transition: none;
+  }
   table tbody tr:first-child {
-    border-top: none; }
+    border-top: none;
+  }
   table tbody tr:last-child {
-    border-bottom: none; }
+    border-bottom: none;
+  }
   table tbody td:last-child {
-    padding-top: 0px; }
+    padding-top: 0px;
+  }
   table tbody td {
     border: none;
     position: relative;
-    padding-left: 35%; }
+    padding-left: 35%;
+  }
   table tbody td:before {
     position: absolute;
     left: 6px;
-    white-space: nowrap; }
+    white-space: nowrap;
+  }
   table tbody td:nth-of-type(1):before {
-    content: "#"; }
+    content: "#";
+  }
   table tbody td:nth-of-type(2):before {
-    content: "Titre"; }
+    content: "Titre";
+  }
   table tbody td:nth-of-type(3):before {
-    content: "Auteur"; }
+    content: "Auteur";
+  }
   table tbody td:nth-of-type(4):before {
-    content: "Pages"; }
+    content: "Pages";
+  }
   table tbody td:nth-of-type(5):before {
-    content: "Lu"; }
+    content: "Lu";
+  }
   table tbody td:nth-of-type(6):before {
-    content: "Supprimer"; } }
-
+    content: "Supprimer";
+  }
+}
 /*# sourceMappingURL=style.css.map */

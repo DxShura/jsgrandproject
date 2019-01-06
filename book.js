@@ -1,5 +1,5 @@
-const buttonSend = document.getElementById('send');
-const bookShelf = document.getElementById('bookShelf');
+const buttonSend = document.querySelector('#send');
+const bookShelf = document.querySelector('#bookShelf');
 const title = document.querySelector("input[name='title']");
 const author = document.querySelector("input[name='author']");
 const pages = document.querySelector("input[name='pages']");
@@ -11,9 +11,9 @@ let bookIndex;
 
 buttonSend.addEventListener('click', addBookToLibrary);
 
-document.addEventListener('DOMContentLoaded', function(){
+if(localStorage){
 	restore();
-});
+}
 
 function store(){
 	library.forEach((book, index) => {
@@ -29,9 +29,9 @@ function restore(){
 	let i = 0;
 	while(localStorage.getItem(`${i}-title`)){
 		const restoredBook = new Book(localStorage.getItem(`${i}-title`),
-                          		  localStorage.getItem(`${i}-author`),
-                          	      localStorage.getItem(`${i}-pages`),
-								  JSON.parse(localStorage.getItem(`${i}-read`)));
+								localStorage.getItem(`${i}-author`),
+								localStorage.getItem(`${i}-pages`),
+								JSON.parse(localStorage.getItem(`${i}-read`)));
 		library.push(restoredBook);
 		i++;
 		render();
@@ -41,6 +41,9 @@ function restore(){
 		bookIndex = -1;
 	}else if(bookIndex === -2){
 		bookIndex = -1;
+	}
+	if(library.length === 0){
+		localStorage.clear();
 	}
 	
 }
@@ -55,6 +58,7 @@ function addBookToLibrary(){
 	let titleEmpty;
 	let authorEmpty;
 	let pagesEmpty;
+	let addBook;
 
 	if(title.value.trim().length){
 		titleEmpty = true;
@@ -88,17 +92,12 @@ function addBookToLibrary(){
 		store();
 		quitForm();
 		emptyInput();
-	} else if(titleEmpty === false){
-		console.log('Title is empty');
-	} else if(authorEmpty === false){
-		console.log('author is empty');
-	} else if(pagesEmpty === false){
-		console.log('pages is empty');
 	}
 }
 
 function deleteBook() {
-	library.splice(this.dataset.bookNumber, 1);
+	library = library.slice(0, this.dataset.bookNumber).concat(library.slice(Number(this.dataset.bookNumber)+1, library.length));
+	
 	let deleteRow = document.getElementById(this.dataset.bookNumber);
 	deleteRow.parentNode.removeChild(deleteRow);
 	localStorage.removeItem(this.dataset.bookNumber + '-title');
@@ -109,11 +108,13 @@ function deleteBook() {
 	localStorage.removeItem(bookIndex + '-author');
 	localStorage.removeItem(bookIndex + '-pages');
 	localStorage.removeItem(bookIndex + '-read');
-	bookIndex--;
-	location.reload();
+	if(library.length === 0){
+		localStorage.clear();
+	}
+	bookIndex = library.length-1;
 	store();
+	location.reload();
 }
-
 function readBook(focusedBook){
 	if(`${focusedBook.read}` === 'true') {
 		checkedButton.textContent = 'Oui';
@@ -122,15 +123,15 @@ function readBook(focusedBook){
 	}
 }
 
-Book.prototype.switchReadBook = function(){
-		library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
-		let bookToSwitchRead = document.getElementById(this.dataset.bookNumber);
-		if(library[this.dataset.bookNumber].read){
-			bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Oui";
-		}else{
-			bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Non";
-		}
-		store();
+function switchReadBook(){
+	library[this.dataset.bookNumber].read = !library[this.dataset.bookNumber].read;
+	let bookToSwitchRead = document.getElementById(this.dataset.bookNumber);
+	if(library[this.dataset.bookNumber].read){
+		bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Oui";
+	}else{
+		bookToSwitchRead.childNodes[4].childNodes[0].innerText = "Non";
+	}
+	store();
 }
 
 function render(){
@@ -162,7 +163,7 @@ function render(){
 		tableDelete.appendChild(deleteButton);
 
 		checkedButton.dataset.bookNumber = index;
-		checkedButton.addEventListener("click", book.switchReadBook);
+		checkedButton.addEventListener("click", switchReadBook);
 
 		deleteButton.dataset.bookNumber = index;
 		deleteButton.addEventListener("click", deleteBook);
